@@ -9,6 +9,11 @@ const endAlignment = Alignment.centerRight;
 class GradientContainer extends StatelessWidget {
   const GradientContainer(this.color1, this.color2, {super.key});
 
+  // Constructor for purple gradient can be used with GradientContainer.purple()
+  const GradientContainer.purple({super.key})
+      : color1 = Colors.purple,
+        color2 = Colors.deepPurple;
+
   final Color color1;
   final Color color2;
 

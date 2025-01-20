@@ -82,7 +82,8 @@ void main() {
         // version1
         // body: GradientContainer(colors),
         // version 2
-        body: GradientContainer(Colors.blue, Colors.pink),
+        // body: GradientContainer(Colors.blue, Colors.pink),
+        body: GradientContainer.purple(),
 
         // body: Padding(
         //   padding: EdgeInsets.all(20),
