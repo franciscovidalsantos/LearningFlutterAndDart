@@ -4,10 +4,13 @@ import 'package:first_app/gradient_container.dart';
 void main() {
   // List<int> a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100];
 
+  // gradient container version 1
+  // final List<Color> colors = [Colors.blue, Colors.pink];
+
   runApp(
     MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.green,
 
         // drawer of the page
         // drawer: Drawer(
@@ -76,7 +79,10 @@ void main() {
         // ),
 
         // body of the page
-        body: GradientContainer(),
+        // version1
+        // body: GradientContainer(colors),
+        // version 2
+        body: GradientContainer(Colors.blue, Colors.pink),
 
         // body: Padding(
         //   padding: EdgeInsets.all(20),
