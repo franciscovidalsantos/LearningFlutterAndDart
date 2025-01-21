@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,23 +55,33 @@ class _DiceRollerState extends State<DiceRoller> {
   @override
   Widget build(context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        FutureBuilder(
-          future:
-              Future.delayed(Duration(seconds: 2)), // Add a delay of 2 seconds
-          builder: (context, snapshot) {
-            return snapshot.connectionState == ConnectionState.waiting
-                ? const CircularProgressIndicator()
-                : _greyscaleImage == null
-                    ? const CircularProgressIndicator()
-                    : Image.memory(
-                        Uint8List.fromList(
-                            img.encodePng(_greyscaleImage!)), // Greyscale image
-                        width: 200.0,
-                      );
-          },
+        SizedBox(
+          width: double.infinity,
+          height: 100,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FutureBuilder(
+                future: Future.delayed(
+                    Duration(seconds: 2)), // Add a delay of 2 seconds
+                builder: (context, snapshot) {
+                  return snapshot.connectionState == ConnectionState.waiting
+                      ? const CircularProgressIndicator()
+                      : _greyscaleImage == null
+                          ? const CircularProgressIndicator()
+                          : Image.memory(
+                              Uint8List.fromList(img.encodePng(
+                                  _greyscaleImage!)), // Greyscale image
+                              width: 200.0,
+                            );
+                },
+              ),
+            ],
+          ),
         ),
         ElevatedButton(
           onPressed: rollDice,
