@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:playground/page_1.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
+import 'package:playground/page_0.dart';
 
 void main() {
   // remove lines below when a physical device is being used
@@ -37,9 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[
-    Center(child: Text('School Page')),
-    Center(child: Text('Park Page')),
+  final List<Widget> _pages = <Widget>[
+    // Center(child: Text('School Page')),
+    Page0(),
+    Page1(),
   ];
 
   void _onItemTapped(int index) {
