@@ -13,7 +13,7 @@ class _QuestionsState extends State<QuestionsScreen> {
   Widget build(context) {
     return MaterialApp(
       home: Scaffold(
-        body: Text("data"),
+        body: Center(child: Text("data")),
       ),
     );
   }
