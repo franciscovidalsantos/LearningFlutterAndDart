@@ -50,7 +50,15 @@ class StartScreen extends StatelessWidget {
 
           Container(
             child: OutlinedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                // TODO
+
+                NavigationDestination(
+                  label: "gone",
+                  enabled: true,
+                  icon: Icon(Icons.church),
+                );
+              },
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white,
                 overlayColor: const Color.fromARGB(255, 160, 252, 55),
