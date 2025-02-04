@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/answer_button.dart';
+import 'package:quiz_app/data/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -10,6 +11,8 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsState extends State<QuestionsScreen> {
+  final currentQuestion = questions[0];
+
   @override
   Widget build(context) {
     return SizedBox(
@@ -18,27 +21,32 @@ class _QuestionsState extends State<QuestionsScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "The questions..",
+            currentQuestion.questionText,
             style: TextStyle(color: Colors.white, fontSize: 25),
           ),
           SizedBox(height: 30),
-          AnswerButton(
-            answerText: "Answer 1",
-            onTap: () {},
-          ),
-          AnswerButton(
-            // we can change the order since they are named arguments and required to be filled by their name
-            onTap: () {},
-            answerText: "Answer 2",
-          ),
-          AnswerButton(
-            answerText: "Answer 3",
-            onTap: () {},
-          ),
-          AnswerButton(
-            answerText: "Answer 4",
-            onTap: () {},
-          ),
+          // spreading
+          ...currentQuestion.options.map((answer) {
+            return AnswerButton(answerText: answer, onTap: () {});
+          })
+
+          // AnswerButton(
+          //   answerText: currentQuestion.options[0],
+          //   onTap: () {},
+          // ),
+          // AnswerButton(
+          //   // we can change the order since they are named arguments and required to be filled by their name
+          //   onTap: () {},
+          //   answerText: currentQuestion.options[1],
+          // ),
+          // AnswerButton(
+          //   answerText: currentQuestion.options[2],
+          //   onTap: () {},
+          // ),
+          // AnswerButton(
+          //   answerText: currentQuestion.options[3],
+          //   onTap: () {},
+          // ),
         ],
       ),
     );
