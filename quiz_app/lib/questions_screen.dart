@@ -17,37 +17,42 @@ class _QuestionsState extends State<QuestionsScreen> {
   Widget build(context) {
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            currentQuestion.questionText,
-            style: TextStyle(color: Colors.white, fontSize: 25),
-          ),
-          SizedBox(height: 30),
-          // spreading
-          ...currentQuestion.options.map((answer) {
-            return AnswerButton(answerText: answer, onTap: () {});
-          })
+      child: Container(
+        margin: EdgeInsets.all(40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              currentQuestion.questionText,
+              style: TextStyle(color: Colors.white, fontSize: 25),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 30),
+            // spreading
+            ...currentQuestion.options.map((answer) {
+              return AnswerButton(answerText: answer, onTap: () {});
+            })
 
-          // AnswerButton(
-          //   answerText: currentQuestion.options[0],
-          //   onTap: () {},
-          // ),
-          // AnswerButton(
-          //   // we can change the order since they are named arguments and required to be filled by their name
-          //   onTap: () {},
-          //   answerText: currentQuestion.options[1],
-          // ),
-          // AnswerButton(
-          //   answerText: currentQuestion.options[2],
-          //   onTap: () {},
-          // ),
-          // AnswerButton(
-          //   answerText: currentQuestion.options[3],
-          //   onTap: () {},
-          // ),
-        ],
+            // AnswerButton(
+            //   answerText: currentQuestion.options[0],
+            //   onTap: () {},
+            // ),
+            // AnswerButton(
+            //   // we can change the order since they are named arguments and required to be filled by their name
+            //   onTap: () {},
+            //   answerText: currentQuestion.options[1],
+            // ),
+            // AnswerButton(
+            //   answerText: currentQuestion.options[2],
+            //   onTap: () {},
+            // ),
+            // AnswerButton(
+            //   answerText: currentQuestion.options[3],
+            //   onTap: () {},
+            // ),
+          ],
+        ),
       ),
     );
   }
