@@ -11,9 +11,29 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsState extends State<QuestionsScreen> {
   @override
   Widget build(context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(child: Text("data")),
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "The questions..",
+            style: TextStyle(color: Colors.white, fontSize: 25),
+          ),
+          SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text("Answer 2"),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text("Answer 3"),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text("Answer 4"),
+          ),
+        ],
       ),
     );
   }
