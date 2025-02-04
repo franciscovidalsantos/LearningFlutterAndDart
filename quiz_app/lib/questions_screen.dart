@@ -30,7 +30,7 @@ class _QuestionsState extends State<QuestionsScreen> {
             ),
             SizedBox(height: 30),
             // spreading
-            ...currentQuestion.options.map((answer) {
+            ...currentQuestion.getShuffledOptions().map((answer) {
               return AnswerButton(answerText: answer, onTap: () {});
             })
 
