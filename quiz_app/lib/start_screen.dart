@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/questions_screen.dart';
 
 class StartScreen extends StatelessWidget {
@@ -24,10 +25,10 @@ class StartScreen extends StatelessWidget {
             // decoration: BoxDecoration(color: Colors.purple[200]),
             child: Text(
               "Boring text message waya :(",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-              ),
+              style: GoogleFonts.lato(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
           ),
 
@@ -35,9 +36,7 @@ class StartScreen extends StatelessWidget {
           //   // decoration: BoxDecoration(color: Colors.pink),
           //   width: double.infinity, // stretch to screen size
           //   child:
-          SizedBox(
-            height: 40, // set space between buttons
-          ),
+          SizedBox(height: 40), // set space between buttons
           // ),
 
           OutlinedButton.icon(
