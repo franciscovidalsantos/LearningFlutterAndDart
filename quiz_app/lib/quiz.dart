@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/questions_screen.dart';
+import 'package:quiz_app/results_screen.dart';
 import 'package:quiz_app/start_screen.dart';
 
 class Quiz extends StatefulWidget {
@@ -19,7 +20,8 @@ class _QuizState extends State<Quiz> {
   //   activeScreen = StartScreen(switchScreen);
   //   super.initState();
   // }
-  List<String> selectedAnswers = []; // growable list
+  // [] displays a growable list but we can also present it by List.empty(growable: true)
+  List<String> selectedAnswers = List.empty(growable: true);
   var activeScreen = "start-screen";
   void switchScreen() {
     setState(() {
@@ -32,8 +34,8 @@ class _QuizState extends State<Quiz> {
     selectedAnswers.add(answer);
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        selectedAnswers = [];
-        activeScreen = "start-screen";
+        selectedAnswers = List.empty(growable: true);
+        activeScreen = "results-screen";
       });
     }
   }
@@ -43,6 +45,9 @@ class _QuizState extends State<Quiz> {
     Widget screenWidget = StartScreen(switchScreen);
     if (activeScreen == "questions-screen") {
       screenWidget = QuestionsScreen(onSelectAnswer: chosenAnswer);
+    }
+    if (activeScreen == "results-screen") {
+      screenWidget = ResultsScreen();
     }
 
     return MaterialApp(
