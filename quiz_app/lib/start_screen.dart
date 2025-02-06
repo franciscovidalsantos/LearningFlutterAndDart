@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/questions_screen.dart';
+import 'package:quiz_app/styles/my_styles.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen(this.startQuiz, {super.key});
@@ -31,28 +32,13 @@ class StartScreen extends StatelessWidget {
                   color: Colors.white),
             ),
           ),
-
-          // Container(
-          //   // decoration: BoxDecoration(color: Colors.pink),
-          //   width: double.infinity, // stretch to screen size
-          //   child:
-          SizedBox(height: 40), // set space between buttons
-          // ),
-
-          OutlinedButton.icon(
-            onPressed: () {
-              startQuiz();
-            },
-            style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.white,
-              overlayColor: const Color.fromARGB(255, 160, 252, 55),
-              side: BorderSide(color: Colors.white),
-            ),
-            label: Text("Start the quiz"),
-            icon: Icon(
-              Icons.front_hand_rounded,
-              color: Colors.white,
-            ),
+          // set space between buttons
+          SizedBox(height: 40),
+          //my outline button
+          MyOutlinedButton(
+            onNavigate: startQuiz,
+            buttonText: "Start the quiz",
+            buttonIcon: Icons.front_hand_rounded,
           ),
         ],
       ),
