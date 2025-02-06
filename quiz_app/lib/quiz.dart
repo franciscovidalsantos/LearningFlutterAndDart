@@ -23,6 +23,7 @@ class _QuizState extends State<Quiz> {
   // [] displays a growable list but we can also present it by List.empty(growable: true)
   List<String> selectedAnswers = List.empty(growable: true);
   var activeScreen = "start-screen";
+
   void switchScreen() {
     setState(() {
       activeScreen = "questions-screen";
@@ -40,14 +41,26 @@ class _QuizState extends State<Quiz> {
     }
   }
 
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = List.empty(growable: true);
+      activeScreen = "questions-screen";
+    });
+  }
+
   @override
   Widget build(context) {
     Widget screenWidget = StartScreen(switchScreen);
     if (activeScreen == "questions-screen") {
-      screenWidget = QuestionsScreen(onSelectAnswer: chosenAnswer);
+      screenWidget = QuestionsScreen(
+        onSelectAnswer: chosenAnswer,
+      );
     }
     if (activeScreen == "results-screen") {
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers);
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswers,
+        onRestart: restartQuiz,
+      );
     }
 
     return MaterialApp(

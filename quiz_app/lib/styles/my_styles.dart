@@ -28,18 +28,18 @@ class MyTextStyles {
 class MyOutlinedButton extends StatelessWidget {
   const MyOutlinedButton(
       {super.key,
-      required this.onNavigate,
+      required this.onPressed,
       required this.buttonText,
       required this.buttonIcon});
 
-  final void Function() onNavigate;
+  final void Function() onPressed;
   final String buttonText;
   final IconData buttonIcon;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
-      onPressed: onNavigate,
+      onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         foregroundColor: Colors.white,
         overlayColor: const Color.fromARGB(255, 160, 252, 55),

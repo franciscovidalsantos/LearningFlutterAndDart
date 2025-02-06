@@ -36,7 +36,7 @@ class StartScreen extends StatelessWidget {
           SizedBox(height: 40),
           //my outline button
           MyOutlinedButton(
-            onNavigate: startQuiz,
+            onPressed: startQuiz,
             buttonText: "Start the quiz",
             buttonIcon: Icons.front_hand_rounded,
           ),
