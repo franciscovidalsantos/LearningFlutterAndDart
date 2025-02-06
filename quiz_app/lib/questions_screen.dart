@@ -43,10 +43,10 @@ class _QuestionsState extends State<QuestionsScreen> {
             Text(
               currentQuestion.questionText,
               style: GoogleFonts.lato(
-                  fontSize: 25,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
             ),
             SizedBox(height: 30),
             // spreading
