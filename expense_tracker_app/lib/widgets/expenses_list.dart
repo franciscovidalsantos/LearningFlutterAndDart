@@ -13,7 +13,9 @@ class ExpenseList extends StatelessWidget {
     // with a constructor .builder will only create if their about to be displayed
     return ListView.builder(
       itemCount: expenses.length,
-      itemBuilder: (ctx, index) => ExpenseItem(expenses[index]),
+      itemBuilder: (ctx, index) => Padding(
+          padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: ExpenseItem(expenses[index])),
     );
   }
 }
