@@ -15,16 +15,18 @@ class ExpenseList extends StatelessWidget {
     // with a constructor .builder will only create if their about to be displayed
     return ListView.builder(
       itemCount: expenses.length,
-      itemBuilder: (ctx, index) => Padding(
-        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: Dismissible(
-          // identify a widget
-          key: ValueKey(expenses[index]),
-          onDismissed: (direction) {
-            onRemoveExpense(expenses[index]);
-          },
-          child: ExpenseItem(expenses[index]),
+      itemBuilder: (ctx, index) => Dismissible(
+        // identify a widget
+        key: ValueKey(expenses[index]),
+        background: Container(
+          color: Theme.of(context).colorScheme.error.withOpacity(0.50),
+          margin: EdgeInsets.symmetric(
+              horizontal: Theme.of(context).cardTheme.margin!.horizontal),
         ),
+        onDismissed: (direction) {
+          onRemoveExpense(expenses[index]);
+        },
+        child: ExpenseItem(expenses[index]),
       ),
     );
   }
