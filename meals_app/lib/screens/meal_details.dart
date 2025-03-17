@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:meals_app/models/meal.dart';
 
 class MealDetailsScreen extends StatefulWidget {
-  const MealDetailsScreen({super.key, required this.meal});
+  const MealDetailsScreen({
+    super.key,
+    required this.meal,
+    required this.onToggleFavorite,
+  });
   final Meal meal;
+  final void Function(Meal meal) onToggleFavorite;
 
   @override
   State<MealDetailsScreen> createState() => _MealDeatailsState();
@@ -13,7 +18,17 @@ class _MealDeatailsState extends State<MealDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Selected Meal')),
+      appBar: AppBar(
+        title: Text(widget.meal.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              widget.onToggleFavorite(widget.meal);
+            },
+            icon: Icon(Icons.star),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
