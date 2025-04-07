@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text('Your List')),
-        body: Text("Hello World"),
+        body: GroceryList(),
       ),
     );
   }
