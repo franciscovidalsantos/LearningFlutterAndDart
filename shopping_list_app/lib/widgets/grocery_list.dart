@@ -24,45 +24,63 @@ class _GroceryListState extends State<GroceryList> {
     _loadItems();
   }
 
+  void _showErrorMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('An error occurred while deleting the item.'),
+      ),
+    );
+  }
+
   void _loadItems() async {
     final url = Uri.https(
       "", // our firebase db url
       "shopping-list.json",
     );
-    final response = await http.get(url);
+    try {
+      final response = await http.get(url);
 
-    print(response.statusCode);
+      if (response.statusCode >= 400) {
+        setState(() {
+          _error = "Could not fetch data.";
+        });
+      }
+      if (response.body == "null") {
+        setState(() {
+          _isLoading = false;
+        });
+        return;
+      }
 
-    if (response.statusCode >= 400) {
+      final Map<String, dynamic> listData = json.decode(response.body);
+      final List<GroceryItem> loadedItems = [];
+      for (final item in listData.entries) {
+        final category =
+            categories.entries
+                .firstWhere(
+                  (categoryItem) =>
+                      categoryItem.value.title == item.value["category"],
+                )
+                .value;
+        loadedItems.add(
+          GroceryItem(
+            id: item.key,
+            name: item.value["name"],
+            quantity: item.value["quantity"],
+            category: category,
+          ),
+        );
+      }
       setState(() {
-        _error = "Could not fetch data.";
+        _groceryItems = loadedItems;
+        _isLoading = false;
+      });
+      // print(response.body);
+    } catch (error) {
+      setState(() {
+        _error = "Something went wrong.";
       });
     }
-
-    final Map<String, dynamic> listData = json.decode(response.body);
-    final List<GroceryItem> loadedItems = [];
-    for (final item in listData.entries) {
-      final category =
-          categories.entries
-              .firstWhere(
-                (categoryItem) =>
-                    categoryItem.value.title == item.value["category"],
-              )
-              .value;
-      loadedItems.add(
-        GroceryItem(
-          id: item.key,
-          name: item.value["name"],
-          quantity: item.value["quantity"],
-          category: category,
-        ),
-      );
-    }
-    setState(() {
-      _groceryItems = loadedItems;
-      _isLoading = false;
-    });
-    // print(response.body);
   }
 
   void _addItem() async {
@@ -77,10 +95,24 @@ class _GroceryListState extends State<GroceryList> {
     });
   }
 
-  void _removeItem(GroceryItem item) {
+  void _removeItem(GroceryItem item) async {
+    int index = _groceryItems.indexOf(item);
     setState(() {
       _groceryItems.remove(item);
     });
+    final url = Uri.https(
+      "flutter-shopping-list-71035-default-rtdb.firebaseio.com",
+      "shopping-list/${item.id}.json",
+    );
+    final response = await http.delete(url);
+    // if the response is an error we add the item back to the list
+    if (response.statusCode >= 400) {
+      // show error message
+      setState(() {
+        _showErrorMessage();
+        _groceryItems.insert(index, item);
+      });
+    }
   }
 
   @override
@@ -110,6 +142,8 @@ class _GroceryListState extends State<GroceryList> {
           );
         },
       );
+    } else {
+      content = Center(child: Text("No items found."));
     }
     if (_error != null) {
       content = Center(child: Text(_error!));
