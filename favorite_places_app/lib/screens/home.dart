@@ -1,6 +1,7 @@
 import 'package:favorite_places_app/models/place.dart';
-import 'package:favorite_places_app/screens/add_new_place.dart';
+import 'package:favorite_places_app/screens/add_place.dart';
 import 'package:favorite_places_app/screens/selected_place.dart';
+import 'package:favorite_places_app/widgets/places_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _navigateToAddNewPlace(BuildContext context) async {
     final newPlace = await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => AddNewPlaceScreen(placesList: _placesList),
+        builder: (context) => AddPlaceScreen(placesList: _placesList),
       ),
     );
     if (newPlace != null) {
@@ -47,32 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body:
-          _placesList.isEmpty
-              ? Center(
-                child: Text(
-                  "No places were added yet.",
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-              : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    for (final item in _placesList) ...[
-                      ListTile(
-                        title: Text(item.title),
-                        // subtitle: Text(
-                        //   (_placesList.indexOf(item) + 1).toString(),
-                        // ),
-                        onTap:
-                            () => _navigateToSelectedPlace(context, item.title),
-                      ),
-                      Divider(),
-                    ],
-                  ],
-                ),
-              ),
+      body: PlacesList(places: _placesList),
     );
   }
 }
