@@ -1,23 +1,30 @@
 import 'package:favorite_places_app/models/place.dart';
+import 'package:favorite_places_app/providers/user_places.dart';
 import 'package:favorite_places_app/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddPlaceScreen extends StatefulWidget {
-  AddPlaceScreen({super.key, required this.placesList});
-  final List<Place> placesList;
-  String addedPlace = '';
+class AddPlaceScreen extends ConsumerStatefulWidget {
+  const AddPlaceScreen({super.key});
 
   @override
-  State<AddPlaceScreen> createState() => _AddPlaceScreenState();
+  ConsumerState<AddPlaceScreen> createState() => _AddPlaceScreenState();
 }
 
-class _AddPlaceScreenState extends State<AddPlaceScreen> {
-  // void _addNewPlaceToList(BuildContext context, List<String> placesList) {
-  //   Navigator.of(
-  //     context,
-  //   ).pop(MaterialPageRoute(builder: (context) => HomeScreen()));
-  // }
+class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _titleController = TextEditingController();
+
+  void _addPlace() {
+    final enteredText = _titleController.text;
+    if (enteredText.isEmpty) {
+      showDialog(context: context, builder: (context) => Text("data"));
+      return;
+    }
+
+    ref.read(userPlacesProvider.notifier).addPlace(Place(title: enteredText));
+
+    Navigator.of(context).pop();
+  }
 
   @override
   void dispose() {
@@ -36,19 +43,13 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             TextField(
               controller: _titleController,
               decoration: InputDecoration(label: Text("Title")),
-              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
             ),
             SizedBox(height: 16),
             ElevatedButton.icon(
-              onPressed: () {
-                final newPlace = Place(title: _titleController.text);
-                if (newPlace.title.isNotEmpty) {
-                  Navigator.of(context).pop(newPlace);
-                }
-                // widget.placesList.add(widget.addedPlace);
-
-                // _addNewPlaceToList(context, widget.placesList);
-              },
+              onPressed: _addPlace,
               icon: Icon(Icons.add),
               label: Text("Add Place"),
             ),

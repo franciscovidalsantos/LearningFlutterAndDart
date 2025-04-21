@@ -1,9 +1,20 @@
 import 'package:favorite_places_app/models/place.dart';
+import 'package:favorite_places_app/screens/selected_place.dart';
 import 'package:flutter/material.dart';
 
 class PlacesList extends StatelessWidget {
   const PlacesList({super.key, required this.places});
   final List<Place> places;
+
+  void _navigateToSelectedPlace(BuildContext context, Place selectedPlace) {
+    print("Selected place: $selectedPlace");
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SelectedPlaceScreen(place: selectedPlace),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (places.isEmpty) {
@@ -30,6 +41,7 @@ class PlacesList extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
+                onTap: () => _navigateToSelectedPlace(context, places[index]),
               ),
               Divider(),
             ],
