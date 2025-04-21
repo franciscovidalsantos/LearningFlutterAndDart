@@ -14,11 +14,15 @@ class _SelectedPlaceScreenState extends State<SelectedPlaceScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.place.title)),
       body: Center(
-        child: Text(
-          'Details of the selected place will appear here.',
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            color: Theme.of(context).colorScheme.onBackground,
-          ),
+        child: Stack(
+          children: [
+            Image.file(
+              widget.place.image,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+            ),
+          ],
         ),
       ),
     );
