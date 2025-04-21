@@ -1,3 +1,4 @@
+import 'package:favorite_places_app/screens/home.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -28,10 +29,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Great Places',
-      theme: theme,
-      home: Scaffold(body: Center(child: Text('Great Places'))),
-    );
+    return MaterialApp(title: 'Great Places', theme: theme, home: HomeScreen());
   }
 }
