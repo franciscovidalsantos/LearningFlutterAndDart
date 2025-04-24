@@ -5,7 +5,11 @@ class UserPlacesNotifier extends StateNotifier<List<Place>> {
   UserPlacesNotifier() : super(const []);
 
   void addPlace(Place place) {
-    final newPlace = Place(title: place.title, image: place.image);
+    final newPlace = Place(
+      title: place.title,
+      image: place.image,
+      location: place.location,
+    );
     state = [newPlace, ...state];
   }
 }

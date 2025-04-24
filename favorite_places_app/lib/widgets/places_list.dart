@@ -45,6 +45,12 @@ class PlacesList extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
+                subtitle: Text(
+                  places[index].location?.address ?? "No address available",
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                ),
                 onTap: () => _navigateToSelectedPlace(context, places[index]),
               ),
               Divider(),

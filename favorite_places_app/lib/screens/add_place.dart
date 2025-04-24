@@ -17,10 +17,13 @@ class AddPlaceScreen extends ConsumerStatefulWidget {
 class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _titleController = TextEditingController();
   File? _selectedImage;
+  PlaceLocation? _selectedLocation;
 
   void _addPlace() {
     final enteredText = _titleController.text;
-    if (enteredText.isEmpty || _selectedImage == null) {
+    if (enteredText.isEmpty ||
+        _selectedImage == null ||
+        _selectedLocation == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please enter a title and select an image.')),
       );
@@ -29,7 +32,13 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
 
     ref
         .read(userPlacesProvider.notifier)
-        .addPlace(Place(title: enteredText, image: _selectedImage!));
+        .addPlace(
+          Place(
+            title: enteredText,
+            image: _selectedImage!,
+            location: _selectedLocation!,
+          ),
+        );
 
     Navigator.of(context).pop();
   }
@@ -44,32 +53,38 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Add new place')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _titleController,
-              decoration: InputDecoration(label: Text("Title")),
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _titleController,
+                decoration: InputDecoration(label: Text("Title")),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            ImageInput(
-              onPickImage: (image) {
-                _selectedImage = image;
-              },
-            ),
-            SizedBox(height: 16),
-            LocationInput(),
-            SizedBox(height: 16),
-            ElevatedButton.icon(
-              onPressed: _addPlace,
-              icon: Icon(Icons.add),
-              label: Text("Add Place"),
-            ),
-          ],
+              SizedBox(height: 16),
+              ImageInput(
+                onPickImage: (image) {
+                  _selectedImage = image;
+                },
+              ),
+              SizedBox(height: 16),
+              LocationInput(
+                onSelectLocation: (location) {
+                  _selectedLocation = location;
+                },
+              ),
+              SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: _addPlace,
+                icon: Icon(Icons.add),
+                label: Text("Add Place"),
+              ),
+            ],
+          ),
         ),
       ),
     );
