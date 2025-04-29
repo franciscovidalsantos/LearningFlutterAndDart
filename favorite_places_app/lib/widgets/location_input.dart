@@ -125,14 +125,15 @@ class _LocationInputState extends State<LocationInput> {
           width: double.infinity,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.primary.withValues(alpha: 0.5),
-              width: 1,
-            ),
+            // border: Border.all(
+            //   color: Theme.of(
+            //     context,
+            //   ).colorScheme.primary.withValues(alpha: 0.5),
+            //   width: 1,
+            // ),
             borderRadius: BorderRadius.circular(8),
           ),
+          clipBehavior: Clip.hardEdge,
           child: previewContent,
         ),
         Row(

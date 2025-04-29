@@ -51,12 +51,13 @@ class _ImageInputState extends State<ImageInput> {
 
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
-          width: 1,
-        ),
+        // border: Border.all(
+        //   color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
+        //   width: 1,
+        // ),
         borderRadius: BorderRadius.circular(8),
       ),
+      clipBehavior: Clip.hardEdge,
       height: 200,
       width: double.infinity,
       alignment: Alignment.center,
