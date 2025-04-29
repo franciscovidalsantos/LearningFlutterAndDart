@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:favorite_places_app/contants.dart';
 import 'package:favorite_places_app/models/place.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -16,7 +17,6 @@ class LocationInput extends StatefulWidget {
 class _LocationInputState extends State<LocationInput> {
   PlaceLocation? _pickedLocation;
   var _isGettingLocation = false;
-  final _ourApiKey = ""; // Replace with your actual API key
 
   String get locationImage {
     if (_pickedLocation == null) {
@@ -24,7 +24,7 @@ class _LocationInputState extends State<LocationInput> {
     }
     final lat = _pickedLocation!.latitude;
     final lng = _pickedLocation!.longitude;
-    return "https://maps.googleapis.com/maps/api/staticmap?center$lat,$lng&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$lat,$lng&key=$_ourApiKey";
+    return "https://maps.googleapis.com/maps/api/staticmap?center$lat,$lng&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$lat,$lng&key=$ourApiKey";
   }
 
   void _getCurrentLocation() async {
@@ -63,7 +63,7 @@ class _LocationInputState extends State<LocationInput> {
     }
 
     final url = Uri.parse(
-      "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$_ourApiKey",
+      "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$ourApiKey",
     );
     final response = await http.get(url);
     final responseData = json.decode(response.body);
